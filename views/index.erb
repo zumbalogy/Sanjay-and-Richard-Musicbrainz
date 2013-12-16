@@ -1,0 +1,84 @@
+<% if @artist %>
+
+<div id="artist-description" class="offset-by-one">
+    <h2 name="artist-name">Artist: <%= @artist %></h2>
+    <label><%="(" + @suggestions[:aliases].join(", ") + ")" if @suggestions[:aliases] != [] %></label>
+    <!--<p>Coutry of Origin: <%= @result_data.country %></p>-->
+</div>
+
+    
+<div id="albums-list" class="four columns">
+    <h3>Albums</h3>
+    <ul>
+        <% @albums.each do |cd| %>
+            <% if cd.urls[:wikipedia]%>
+                <li><a href="<%= cd.urls[:wikipedia]%>"><%= cd.title %></a></li>
+            <% else %>
+                <li><%= cd.title %></li>
+            <% end %>
+        <%end%>
+    </ul>
+</div>
+
+
+<div id="youtube-search" class="eleven columns">
+    <h3>Videos to check out:</h3>
+    <% @video_names.each do |video| %>
+        <% a = video.gsub('watch?v=','embed/') %>
+        <iframe src="//www.youtube.com/<%= a %>" frameborder="0" allowfullscreen></iframe>
+    <% end %>
+</div>
+
+
+<div id="link-resources" class="eleven columns">
+    <ul>
+    <% @result_data.urls.each do |k, v| %>
+        <% if k == :wikipedia %>
+            <p><%= @doc %></p>
+            <p>Source: <a href="<%= @result_data.urls[k]%>"><%= @result_data.urls[k] %></a></p>
+        <% end %>
+
+            <% if @keys.include? k %>
+                <h5><%= k.to_s.gsub("_", " ").capitalize %></h5>
+
+                <% unless @result_data.urls[k].class == [].class %>
+                    <li><a href="<%= @result_data.urls[k]%>"><%= @result_data.urls[k] %></a></li>
+                <% else %>
+                    <% @result_data.urls[k].each do |item| %>
+                        <li><a href="<%= item%>"><%= item %></a></li>
+                    <% end %>      
+                <% end %>
+
+            <% end %>
+    <% end %>
+    </ul>
+</div>
+
+<!-- 
+    <p><%= "Wikipedia: " if @result_data.urls[:wikipedia] %>
+        <a href="<%= @result_data.urls[:wikipedia]%>">
+            <%=@result_data.urls[:wikipedia]%>
+        </a>
+    </p>
+    <p><%= "Soundcloud: " if @result_data.urls[:soundcloud] %>
+        <a href="<%= @result_data.urls[:soundcloud]%>">
+            <%=@result_data.urls[:soundcloud]%>
+        </a>
+    </p>
+    <p><%= "YouTube: " if @result_data.urls[:youtube] %>
+        <a href="<%= @result_data.urls[:youtube]%>">
+            <%=@result_data.urls[:youtube]%>
+        </a>
+    </p>
+    <p><%= "Homepage: " if @result_data.urls[:official_homepage] %>
+        <a href="<%= @result_data.urls[:official_homepage]%>">
+            <%=@result_data.urls[:official_homepage]%>
+        </a>
+    </p>
+    <p><%= "Fanpage: " if @result_data.urls[:fanpage] %>
+        <a href="<%= @result_data.urls[:fanpage]%>">
+            <%=@result_data.urls[:fanpage]%>
+        </a>
+    </p> -->
+
+<% end %>

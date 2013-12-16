@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Rich + Sanjay's Music App</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/base.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/layout.css">
+</head>
+<body>
+
+<div class="container">
+	<div id="nav-bar" class="clearfix">
+	    <h1>MuiscBrainz App</h1>
+	    <form action="/" method="post">
+	        <input type="text" name='artist' placeholder="by artist(ex:Beatles)">
+	        <input type="submit" value="Search">
+	    </form>
+	</div>
+
+	<%= yield %>
+</div>
+
+</body>
+</html>
